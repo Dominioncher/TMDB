@@ -1,5 +1,6 @@
 # TMDB
 
+Канбан https://app.zenhub.com/workspaces/tmdb-5c892032528594118690c6b5/boards?repos=175445408
 TMDB Box Office Prediction (Предсказание кассовых сборов TMDB) https://www.kaggle.com/c/tmdb-box-office-prediction
 
 План действий по каждому этапу CRISP-DM:
