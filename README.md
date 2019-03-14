@@ -6,16 +6,4 @@ TMDB Box Office Prediction (Предсказание кассовых сборо
 
 Описание CRISP-DM https://habr.com/ru/company/lanit/blog/328858/
 
-План действий по каждому этапу CRISP-DM:
-
-1. Понимание бизнес-целей (Business Understanding)
-
-2. Начальное изучение данных (Data Understanding)
-
-3. Подготовка данных (Data Preparation)
-
-4. Моделирование (Modeling)
-
-5. Оценка (Evaluation)
-
-6. Внедрение (Deployment)
+Задание до 16.03.2019 https://docs.google.com/document/d/1xokRM3oxGs_GSN7cWi2QUif0SZugu8Xntws4byrN3mY/edit
