@@ -20,19 +20,19 @@ top       http://www.transformersmovie.com/
 freq                                      4
 count          3000
 unique         3000
-top       tt2888046
+top       tt0762114
 freq              1
 count     3000
 unique      36
 top         en
 freq      2575
-count         3000
-unique        2975
-top       Deadfall
-freq             2
+count                  3000
+unique                 2975
+top       Alone in the Dark
+freq                      2
 count                                                  2992
 unique                                                 2992
-top       A Seattle couple travel to New York to intervi...
+top       Four sons of well-known New York mobsters must...
 freq                                                      1
 count    3000.000000
 mean        8.463274
@@ -44,7 +44,7 @@ min         0.000001
 max       294.337037
 count                                 2999
 unique                                2999
-top       /d4Yq4Y4ieKLD8JzxSv1g8dZzcLN.jpg
+top       /mCu8mJRbBD8x187A5WserM9YhOr.jpg
 freq                                     1
 count                                          2844
 unique                                         2383
@@ -56,7 +56,7 @@ top       [{'iso_3166_1': 'US', 'name': 'United States o...
 freq                                                   1752
 count        3000
 unique       2398
-top       9/10/15
+top       9/10/10
 freq            5
 count    2998.000000
 mean      107.856571
@@ -78,10 +78,10 @@ count                       2403
 unique                      2400
 top       Based on a true story.
 freq                           3
-count                  3000
-unique                 2969
-top       Alone in the Dark
-freq                      2
+count                      3000
+unique                     2969
+top       The Magnificent Seven
+freq                          2
 count                                            2724
 unique                                           2648
 top       [{'id': 10183, 'name': 'independent film'}]
@@ -92,7 +92,7 @@ top         []
 freq        13
 count                                                  2984
 unique                                                 2984
-top       [{'credit_id': '59b88e659251417df80091a0', 'de...
+top       [{'credit_id': '52fe466ac3a368484e08f893', 'de...
 freq                                                      1
 count    3.000000e+03
 mean     6.672585e+07
