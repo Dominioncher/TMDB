@@ -1,5 +1,5 @@
-import pandas as pd 
-from describe import print_description
+import pandas as pd
+from TMDB.describe import print_description
 
 submission_data = pd.read_csv("data/sample_submission.csv", index_col=0)
 train_data = pd.read_csv("data/train.csv", index_col=0)
