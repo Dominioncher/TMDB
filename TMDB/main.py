@@ -4,9 +4,9 @@ import datetime
 
 now = datetime.datetime.now()
 
-data1 = pd.read_csv("sample_submission.csv", index_col=0) 
-data2 = pd.read_csv("train.csv", index_col=0) 
-data3 = pd.read_csv("test.csv", index_col=0) 
+data1 = pd.read_csv("data/sample_submission.csv", index_col=0)
+data2 = pd.read_csv("data/train.csv", index_col=0)
+data3 = pd.read_csv("data/test.csv", index_col=0)
 
 #print(data2.shape)
 print(data2.info())
