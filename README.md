@@ -4,7 +4,7 @@
 
 TMDB Box Office Prediction (Предсказание кассовых сборов TMDB) https://www.kaggle.com/c/tmdb-box-office-prediction
 
-Задание до 16.03.2019 https://docs.google.com/document/d/1xokRM3oxGs_GSN7cWi2QUif0SZugu8Xntws4byrN3mY/edit
+Задание https://docs.google.com/document/d/1xokRM3oxGs_GSN7cWi2QUif0SZugu8Xntws4byrN3mY/edit
 
 Гугл док куда все пишем https://docs.google.com/document/d/1WppKpT4auXkKI-ELn96aJ3FhmBp7JOHQCVfdryyGsow/edit?usp=sharing
 
