@@ -4,7 +4,6 @@ from TMDB.Modules.Models import Models as classifiers
 from TMDB.Modules.Data import DataSet
 from TMDB.Modules.DataPreparation import DataPreparation as preparation
 from TMDB.Modules.Metrics import Metrics as metrics
-from TMDB.Modules.Statistic.Correlations import correlation_table
 from TMDB.Modules.Statistic.Describe import description
 
 pd.set_option('display.max_rows', 500)
@@ -45,6 +44,3 @@ metrics.r2(target_test, target_predict)
 # Статистика результата обучения
 result = result_frame(target_test, target_predict)
 print(description(result))
-
-correlation_table(result)
-

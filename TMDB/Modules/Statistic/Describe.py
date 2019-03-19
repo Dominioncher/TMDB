@@ -1,12 +1,15 @@
-import pandas as pd 
+import pandas as pd
+pd.options.display.float_format = '{:20,.2f}'.format
 
-def print_description(data):
+
+def description(data: pd.DataFrame, path: str = None)-> None:
+    if path:
+        text_file = open(path, "w+")
     for name, values in data.iteritems():
-        print(values.describe(), '\n')
-        
-def file_description(data, filename):
-    text_file = open(filename, "w+")
-    for name, values in data.iteritems():
-        text_file.write(values.describe().to_string())
-        text_file.write('\n')
-    text_file.close()
+        value = 'COLUMN : ' + name + '\n\n' + values.describe().to_string() + \
+                '\n------------------------------------------------------------------------------------\n '
+        print(value)
+        if path:
+            text_file.write(value)
+    if path:
+        text_file.close()

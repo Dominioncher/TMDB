@@ -1,7 +1,5 @@
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.neural_network import MLPRegressor
 
-
-RandomForest = RandomForestClassifier(max_depth=20)
-MLP = MLPClassifier()
-SimpleRandomForest = RandomForestClassifier()
+RandomForest = RandomForestRegressor()
+MLP = MLPRegressor()

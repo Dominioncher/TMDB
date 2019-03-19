@@ -1,34 +1,25 @@
-import seaborn as sns
-import matplotlib.pyplot as plt
-from sklearn import preprocessing 
 import pandas as pd
-from pylab import savefig
+import seaborn as sns
 import numpy as np
+from TMDB.Modules.Helpers.LabelEncoding import label_encode
+import matplotlib.pyplot as plt
 
 
-def correlation_table(data):
-    le = preprocessing.LabelEncoder() 
-    for col in data.columns: 
-        if data[col].dtype == pd.np.object: 
-            data[col] = le.fit_transform(data[col].astype(dtype=pd.np.str)) 
+def correlation_table(data: pd.DataFrame, path: str=None) -> None:
+    data = label_encode(data)
     corr = data.corr()
-    
-        # Generate a mask for the upper triangle
+
+    # Generate a mask for the upper triangle
     mask = np.zeros_like(corr, dtype=np.bool)
     mask[np.triu_indices_from(mask)] = True
-    
-    # Set up the matplotlib figure
-    f, ax = plt.subplots(figsize=(11, 9))
-    
+
     # Generate a custom diverging colormap
     cmap = sns.diverging_palette(220, 10, as_cmap=True)
-    
+
     # Draw the heatmap with the mask and correct aspect ratio
-    pic = sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
-                square=True, linewidths=.5, cbar_kws={"shrink": .5})
-          
-    figure = pic.get_figure()    
-     # Thus we have to give more margin:
-    figure.subplots_adjust(bottom=0.2)
-    
-    figure.savefig('Data/corr.png', dpi=400)
+    pic = sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0, square=True, linewidths=.5, cbar_kws={"shrink": .5})
+    if path:
+        figure = pic.get_figure()
+        figure.subplots_adjust(bottom=0.35, top=1)
+        figure.savefig(path, dpi=600)
+    plt.show()
