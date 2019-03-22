@@ -10,9 +10,14 @@ pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('expand_frame_repr', False)
 
-
 # Считали DataFrame c данными для обучения
 data = DataSet.read_train()
+
+# dummy кодирование жанра
+data['genres'] = data['genres'].map(lambda x: sorted([d['name'] for d in preparation.get_dictionary(x)])).map(lambda x: ','.join(map(str, x)))
+genres = data.genres.str.get_dummies(sep=',')
+data = pd.concat([data, genres], axis=1, sort=False)
+data = data.drop(columns=["genres"])
 
 # Фича инженеринг
 data = preparation.feature_engineering(data)
