@@ -23,4 +23,10 @@ def data_split(data: pd.DataFrame, target_column_name: str):
     data = data.drop([target_column_name], axis=1)
     return train_test_split(data, target, test_size=0.33, random_state=42)
 
-
+# Используется в разбиении объекта
+def get_dictionary(s):
+    try:
+        d = eval(s)
+    except:
+        d = {}
+    return d
