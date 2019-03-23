@@ -14,11 +14,8 @@ pd.set_option('expand_frame_repr', False)
 data = DataSet.read_train()
 
 # dummy кодирование жанра
-data['genres'] = data['genres'].map(lambda x: sorted([d['name'] for d in preparation.get_dictionary(x)])).map(lambda x: ','.join(map(str, x)))
-genres = data.genres.str.get_dummies(sep=',')
-data = pd.concat([data, genres], axis=1, sort=False)
-data = data.drop(columns=["genres"])
-
+data, genres = preparation.dummy_code_genres(data)
+#data = preparation.dummy_code_production_companies(data)
 # Фича инженеринг
 data = preparation.feature_engineering(data)
 # Заполнили пустые значения

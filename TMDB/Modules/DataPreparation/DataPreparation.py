@@ -10,6 +10,26 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
     data = label_encode(data)
     return data
 
+def dummy_code_genres(data: pd.DataFrame):
+    data['genres'] = data['genres'].map(lambda x: sorted([d['name'] for d in get_dictionary(x)])).map(lambda x: ','.join(map(str, x)))
+    genres = data.genres.str.get_dummies(sep=',')
+    data = pd.concat([data, genres], axis=1, sort=False)
+    data = data.drop(columns=["genres"])
+    return data, genres.columns.values.tolist()
+
+def dummy_code_production_companies(data: pd.DataFrame)-> pd.DataFrame:
+    data['production_companies'] = data['production_companies'].map(lambda x: sorted([d['name'] for d in get_dictionary(x)])).map(lambda x: ','.join(map(str, x)))
+    companies = data.production_companies.str.get_dummies(sep=',')
+    data = pd.concat([data, companies], axis=1, sort=False)
+    data = data.drop(columns=["production_companies"])
+    return data
+
+def weight_code_production_companies(data: pd.DataFrame)-> pd.DataFrame:
+    data['production_companies'] = data['production_companies'].map(lambda x: sorted([d['name'] for d in get_dictionary(x)])).map(lambda x: ','.join(map(str, x)))
+    companies = data.production_companies.str.get_dummies(sep=',')
+    data = pd.concat([data, companies], axis=1, sort=False)
+    data = data.drop(columns=["production_companies"])
+    return data
 
 # Заполнение пропущенных значений
 def fill_na_values(data: pd.DataFrame) -> pd.DataFrame:
