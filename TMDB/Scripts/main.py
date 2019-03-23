@@ -1,5 +1,5 @@
 import pandas as pd
-from TMDB.Modules.Helpers.Result import result_frame
+from TMDB.Modules.Helpers.Result import result_frame, kaggle_result
 from TMDB.Modules.Models import Models as classifiers
 from TMDB.Modules.Data import DataSet
 from TMDB.Modules.DataPreparation import DataPreparation as preparation
@@ -12,16 +12,19 @@ pd.set_option('expand_frame_repr', False)
 
 # Считали DataFrame c данными для обучения
 data = DataSet.read_train()
+kaggle_test_data = DataSet.read_test()
 
-# dummy кодирование жанра
-data, genres = preparation.dummy_code_genres(data)
-#data = preparation.dummy_code_production_companies(data)
 # Фича инженеринг
 data = preparation.feature_engineering(data)
 # Заполнили пустые значения
 data = preparation.fill_na_values(data)
-#data = preparation.fill_zero_genres(data, genres.columns.values.tolist())
+# Заполнили пустые значения для kaggle
+kaggle_test_data = preparation.fill_test_na_values(kaggle_test_data)
+# Заполнение бюджета
 data = preparation.drop_zero_budget(data)
+# Кодирование строк
+data, kaggle_test_data = preparation.label_coding(data, kaggle_test_data)
+
 # Разделили на тестовую и обучающую выборки
 data_train, data_test, target_train, target_test = preparation.data_split(data, 'revenue')
 
@@ -48,3 +51,17 @@ metrics.r2(target_test, target_predict)
 # Статистика результата обучения
 result = result_frame(target_test, target_predict)
 print(description(result))
+
+
+
+
+
+
+
+
+
+
+
+# Формируем решение для kaggle
+target_predict = estimator.predict(kaggle_test_data)
+kaggle_result(target_predict, kaggle_test_data)
