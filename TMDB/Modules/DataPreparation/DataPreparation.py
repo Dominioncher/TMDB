@@ -16,6 +16,26 @@ def fill_na_values(data: pd.DataFrame) -> pd.DataFrame:
     data = data.dropna()
     return data
 
+def fill_zero_genres(data: pd.DataFrame, genres)-> pd.DataFrame:
+    zero_films = data[data['budget'] == 0]
+    for i,row in zero_films.iterrows():
+        budget = 0
+        counter = 0
+        for genre in genres:
+            if row[genre] == 1:
+                filled_budget = data[data[genre] == 1]
+                budget = budget + filled_budget['budget'].mean()
+                counter = counter + 1
+        if budget == 0:
+            data.drop([i], axis=0)
+        else:
+            data.set_value(i, 'budget', float(budget) / float(counter))
+
+    return data
+
+def drop_zero_budget(data: pd.DataFrame)-> pd.DataFrame:
+    non_zero_films = data[data['budget'] != 0]
+    return non_zero_films
 
 # Разбиение выборки на тестовую и тренировочную
 def data_split(data: pd.DataFrame, target_column_name: str):

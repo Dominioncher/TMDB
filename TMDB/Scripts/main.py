@@ -23,6 +23,8 @@ data = data.drop(columns=["genres"])
 data = preparation.feature_engineering(data)
 # Заполнили пустые значения
 data = preparation.fill_na_values(data)
+#data = preparation.fill_zero_genres(data, genres.columns.values.tolist())
+data = preparation.drop_zero_budget(data)
 # Разделили на тестовую и обучающую выборки
 data_train, data_test, target_train, target_test = preparation.data_split(data, 'revenue')
 
