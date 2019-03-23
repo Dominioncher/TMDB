@@ -29,7 +29,7 @@ data, kaggle_test_data = preparation.label_coding(data, kaggle_test_data)
 data_train, data_test, target_train, target_test = preparation.data_split(data, 'revenue')
 
 # Выбрали настроенный классификатор
-estimator = classifiers.RandomForest
+estimator = classifiers.Hyber
 
 # Начали обучать его
 print('start fit')
@@ -40,6 +40,7 @@ print('end fit')
 target_predict = estimator.predict(data_train)
 print("On Train Set")
 metrics.r2(target_train, target_predict)
+metrics.RMSLE(target_train, target_predict)
 # Статистика результата обучения
 result = result_frame(target_train, target_predict)
 print(description(result))
@@ -48,6 +49,7 @@ print(description(result))
 target_predict = estimator.predict(data_test)
 print("On Test Set")
 metrics.r2(target_test, target_predict)
+metrics.RMSLE(target_test, target_predict)
 # Статистика результата обучения
 result = result_frame(target_test, target_predict)
 print(description(result))
