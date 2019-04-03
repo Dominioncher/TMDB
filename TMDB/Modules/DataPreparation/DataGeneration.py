@@ -3,7 +3,9 @@ import pandas as pd
 
 def weight_code_production_companies(data: pd.DataFrame)-> pd.DataFrame:
     data['companies'] = data['production_companies'].map(lambda x: sorted([d['id'] for d in get_dictionary(x)]))
-    companies_weight = dict() #Словарь с весами компаний
+
+    companies_weight = dict()  # Словарь с весами компаний
+
     for i, row in data.iterrows():
         revenue = 0
         counter = 0
@@ -13,7 +15,6 @@ def weight_code_production_companies(data: pd.DataFrame)-> pd.DataFrame:
 
             revenue += mean_revenue
             counter += 1
-
         else:
             data.set_value(i, 'company_weight', float(revenue) / float(counter))
 
@@ -21,7 +22,6 @@ def weight_code_production_companies(data: pd.DataFrame)-> pd.DataFrame:
 
     data['company_weight'] = (data['company_weight']-data['company_weight'].min())/(data['company_weight'].max()-data['company_weight'].min())
     return data
-
 
 
 # Используется для парса Json с данными
