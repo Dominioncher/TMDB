@@ -7,6 +7,8 @@ from sklearn.model_selection import train_test_split
 
 # Подготовка данных + удаление ненужных колонок + добавление новых колонок
 def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
+    data = data.drop(["imdb_id", "original_title", "overview", "popularity", "poster_path", "status"], axis=1)
+
     return data
 
 
