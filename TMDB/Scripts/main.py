@@ -19,13 +19,16 @@ kaggle = DataSet.read_test()
 data = preparation.feature_engineering(data)
 kaggle = preparation.feature_engineering(kaggle)
 
-# Заполнили пустые значения
-data = preparation.fill_na_values(data)
-kaggle = preparation.fill_kaggle_na_values(kaggle)
-
 # Кодирование строк
 data, kaggle = encoding.encode_labels(data, kaggle)
 
+# Удаление лишних колонок
+data = preparation.drop_columns(data)
+kaggle = preparation.drop_columns(kaggle)
+
+# Заполнили пустые значения
+data = preparation.fill_na_values(data)
+kaggle = preparation.fill_kaggle_na_values(kaggle)
 
 # Разделили на тестовую и обучающую выборки
 data_train, data_test, target_train, target_test = preparation.data_split(data, 'revenue')

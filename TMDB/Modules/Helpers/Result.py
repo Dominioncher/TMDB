@@ -10,6 +10,7 @@ def result_frame(target_test, target_predict) -> pd.DataFrame:
     result["|predict - target|"] = (result["predict"] - result["target"]).abs()
     return result
 
+
 def kaggle_result(predict, data) -> pd.DataFrame:
     result = pd.DataFrame(data.index)
     result.columns = ['id']
