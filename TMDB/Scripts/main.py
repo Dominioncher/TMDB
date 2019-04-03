@@ -14,6 +14,9 @@ pd.set_option('expand_frame_repr', False)
 data = DataSet.read_train()
 kaggle_test_data = DataSet.read_test()
 
+# Ненужные - нахой с пляжа
+data = preparation.drop_trash(data)
+kaggle_test_data = preparation.drop_trash(kaggle_test_data)
 # Фича инженеринг
 data = preparation.feature_engineering(data)
 # Заполнили пустые значения

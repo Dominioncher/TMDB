@@ -98,3 +98,7 @@ def get_dictionary(s):
     except:
         d = {}
     return d
+
+#Удаление ненужных
+def drop_trash(data: pd.DataFrame)-> pd.DataFrame:
+    return data.drop(["imdb_id", "original_title", "overview", "popularity", "poster_path", "status"], axis=1)
