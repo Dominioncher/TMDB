@@ -15,9 +15,6 @@ pd.set_option('expand_frame_repr', False)
 data = DataSet.read_train()
 kaggle = DataSet.read_test()
 
-# Ненужные - нахой с пляжа
-data = preparation.drop_trash(data)
-kaggle = preparation.drop_trash(kaggle)
 # Фича инженеринг
 data = preparation.feature_engineering(data)
 kaggle = preparation.feature_engineering(kaggle)
