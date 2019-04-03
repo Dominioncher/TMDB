@@ -5,7 +5,7 @@ from TMDB.Modules.Data import DataSet
 from TMDB.Modules.DataPreparation import DataPreparation as preparation
 from TMDB.Modules.Metrics import Metrics as metrics
 from TMDB.Modules.Statistic.Describe import description
-from TMDB.Modules.Helpers import LabelEncoding as encoding
+from TMDB.Modules.DataPreparation import LabelDataEncode as encoding
 
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
@@ -24,7 +24,7 @@ data = preparation.fill_na_values(data)
 kaggle = preparation.fill_kaggle_na_values(kaggle)
 
 # Кодирование строк
-data, kaggle = encoding.label_coding(data, kaggle)
+data, kaggle = encoding.encode_labels(data, kaggle)
 
 
 # Разделили на тестовую и обучающую выборки
