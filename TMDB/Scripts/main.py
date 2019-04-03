@@ -17,7 +17,7 @@ kaggle = DataSet.read_test()
 
 # Ненужные - нахой с пляжа
 data = preparation.drop_trash(data)
-kaggle_test_data = preparation.drop_trash(kaggle_test_data)
+kaggle = preparation.drop_trash(kaggle)
 # Фича инженеринг
 data = preparation.feature_engineering(data)
 kaggle = preparation.feature_engineering(kaggle)
@@ -58,16 +58,6 @@ metrics.RMSLE(target_test, target_predict)
 # Статистика результата обучения
 result = result_frame(target_test, target_predict)
 print(description(result))
-
-
-
-
-
-
-
-
-
-
 
 # Формируем решение для kaggle
 target_predict = estimator.predict(kaggle)

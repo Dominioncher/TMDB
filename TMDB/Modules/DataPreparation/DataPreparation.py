@@ -43,3 +43,7 @@ def fill_zero_genres(data: pd.DataFrame, genres)-> pd.DataFrame:
             data.set_value(i, 'budget', float(budget) / float(counter))
 
     return data
+
+#Удаление ненужных
+def drop_trash(data: pd.DataFrame)-> pd.DataFrame:
+    return data.drop(["imdb_id", "original_title", "overview", "popularity", "poster_path", "status"], axis=1)
