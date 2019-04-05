@@ -24,6 +24,11 @@ def weight_code_production_companies(data: pd.DataFrame)-> pd.DataFrame:
     return data
 
 
+# Парсинг команды фильма по названию работы
+def parse_crew(data: pd.DataFrame, job: str):
+    return data['crew'].map(lambda x: [hh['name'] for hh in [d for d in get_dictionary(x)] if hh['job'] == job])
+
+
 # Используется для парса Json с данными
 def get_dictionary(s):
     try:
