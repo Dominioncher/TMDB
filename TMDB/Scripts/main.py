@@ -15,16 +15,16 @@ pd.set_option('expand_frame_repr', False)
 data = DataSet.read_train()
 kaggle = DataSet.read_test()
 
+# Удаление лишних колонок
+data = preparation.drop_columns(data)
+kaggle = preparation.drop_columns(kaggle)
+
 # Фича инженеринг
 data = preparation.feature_engineering(data)
 kaggle = preparation.feature_engineering(kaggle)
 
 # Кодирование строк
 data, kaggle = encoding.encode_labels(data, kaggle)
-
-# Удаление лишних колонок
-data = preparation.drop_columns(data)
-kaggle = preparation.drop_columns(kaggle)
 
 # Заполнили пустые значения
 data = preparation.fill_na_values(data)
