@@ -1,9 +1,10 @@
 import pandas as pd
 from TMDB.Modules.Helpers.TolerantLabelEncoder import TolerantLabelEncoder
+import numpy as np
 
 
 def simple_encoder_fit(train: pd.Series, test: pd.Series):
-    le = TolerantLabelEncoder(ignore_unknown=True)
+    le = TolerantLabelEncoder(ignore_unknown=True, unknown_encoded_value=0)
     train = le.fit_transform(train.astype(dtype=pd.np.str))
     test = le.transform(test.astype(dtype=pd.np.str))
     return train, test
@@ -11,8 +12,8 @@ def simple_encoder_fit(train: pd.Series, test: pd.Series):
 
 def dummy_code(train: pd.Series, test: pd.Series):
     name = train.name
-    train = pd.get_dummies(train.apply(pd.Series).stack()).sum(level=0)
-    test = pd.get_dummies(test.apply(pd.Series).stack()).sum(level=0)
+    train = pd.get_dummies(train.apply(pd.Series).stack(dropna=False)).sum(level=0)
+    test = pd.get_dummies(test.apply(pd.Series).stack(dropna=False)).sum(level=0)
 
     train = train.rename(columns=lambda x: name + '_' + x)
     test = test.rename(columns=lambda x: name + '_' + x)
