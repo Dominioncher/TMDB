@@ -1,10 +1,10 @@
 import pandas as pd
-from TMDB.Modules.Helpers.LabelEncoding import simple_encoder_fit, dummy_code_arrays
+from TMDB.Modules.Helpers.LabelEncoding import simple_encoder_fit, dummy_code
 
 
 def encode_labels(data: pd.DataFrame, test_data: pd.DataFrame):
 
-    train, test = dummy_code_arrays(data['genres'], test_data['genres'])
+    train, test = dummy_code(data['genres'], test_data['genres'])
 
     data = data.join(train)
     test_data = test_data.join(test)

@@ -9,9 +9,13 @@ def simple_encoder_fit(train: pd.Series, test: pd.Series):
     return train, test
 
 
-def dummy_code_arrays(train: pd.Series, test: pd.Series):
+def dummy_code(train: pd.Series, test: pd.Series):
+    name = train.name
     train = pd.get_dummies(train.apply(pd.Series).stack()).sum(level=0)
     test = pd.get_dummies(test.apply(pd.Series).stack()).sum(level=0)
+
+    train = train.rename(columns=lambda x: name + '_' + x)
+    test = test.rename(columns=lambda x: name + '_' + x)
 
     # Get missing columns in the training test
     missing_cols = set(train.columns) - set(test.columns)
