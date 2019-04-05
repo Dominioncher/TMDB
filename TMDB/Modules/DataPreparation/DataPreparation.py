@@ -58,7 +58,7 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
     data['spring'] = data['release_date'].map(lambda x: 0 if pd.isna(x) else spring(int(x.split("/")[0])))
     data['summer'] = data['release_date'].map(lambda x: 0 if pd.isna(x) else summer(int(x.split("/")[0])))
     data['autumn'] = data['release_date'].map(lambda x: 0 if pd.isna(x) else autumn(int(x.split("/")[0])))
-    # data = data.drop(["release_date"], axis=1)
+    data = data.drop(["release_date"], axis=1)
     data = data.drop(["Keywords",'companies','cast', 'collection','homepage','crew_Directors', 'crew_Producers', 'crew_Writers', 'tagline'], axis=1)
     return data
 
