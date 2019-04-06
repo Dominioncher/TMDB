@@ -63,7 +63,7 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
     data['usually_runtime'] = data['runtime'].map(lambda x: 1 if 60 <= x < 120 else 0)
     data['long_runtime'] = data['runtime'].map(lambda x: 1 if x >= 120 else 0)
     data = data.drop(
-        ["Keywords", 'companies', 'cast', 'collection', 'homepage', 'crew_Directors', 'crew_Producers', 'crew_Writers',
+        ["Keywords", 'cast', 'collection', 'homepage', 'crew_Directors', 'crew_Producers', 'crew_Writers',
          'tagline'], axis=1)
     return data
 
@@ -86,6 +86,87 @@ def data_split(data: pd.DataFrame, target_column_name: str):
     data = data.drop([target_column_name], axis=1)
     return train_test_split(data, target, test_size=0.33, random_state=42)
 
+def get_comp_weights(data:pd.DataFrame):
+    companies_weight = dict()  # Словарь с весами компаний
+
+    for i, row in data.iterrows():
+        revenue = 0
+        counter = 0
+        for company in row['companies']:
+            filled_revenue = data[data['companies'].apply(lambda x: company in x)]
+            mean_revenue = filled_revenue['revenue'].dropna().mean()
+
+            revenue += mean_revenue
+            counter += 1
+
+            companies_weight[company] = mean_revenue
+
+    return companies_weight
+
+
+def set_comp_weights(data:pd.DataFrame, company_weights:dict):
+    for i, row in data.iterrows():
+        revenue = 0
+        counter = 0
+        for company in row['companies']:
+            if company not in company_weights:
+                continue
+
+            mean_revenue = company_weights[company]
+
+            revenue = revenue + mean_revenue
+            counter = counter + 1
+        if counter == 0:
+            data.set_value(i, 'company_weight', np.nan)
+        else:
+            data.set_value(i, 'company_weight', float(revenue) / float(counter))
+
+    data = data.drop(columns=['companies'])
+
+    data['company_weight'] = (data['company_weight'] - data['company_weight'].min()) / (
+                data['company_weight'].max() - data['company_weight'].min())
+    return data
+
+def get_weights(data:pd.DataFrame, column:str):
+    companies_weight = dict()  # Словарь с весами компаний
+
+    for i, row in data.iterrows():
+        revenue = 0
+        counter = 0
+        for col in row[column]:
+            filled_revenue = data[data[column].apply(lambda x: col in x)]
+            mean_revenue = filled_revenue['revenue'].dropna().mean()
+
+            revenue += mean_revenue
+            counter += 1
+
+            companies_weight[col] = mean_revenue
+
+    return companies_weight
+
+
+def set_weights(data:pd.DataFrame, company_weights:dict):
+    for i, row in data.iterrows():
+        revenue = 0
+        counter = 0
+        for company in row['companies']:
+            if company not in company_weights:
+                continue
+
+            mean_revenue = company_weights[company]
+
+            revenue = revenue + mean_revenue
+            counter = counter + 1
+        if counter == 0:
+            data.set_value(i, 'company_weight', np.nan)
+        else:
+            data.set_value(i, 'company_weight', float(revenue) / float(counter))
+
+    data = data.drop(columns=['companies'])
+
+    data['company_weight'] = (data['company_weight'] - data['company_weight'].min()) / (
+                data['company_weight'].max() - data['company_weight'].min())
+    return data
 
 # Используется для парса Json с данными
 def get_dictionary(s):

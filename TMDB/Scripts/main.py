@@ -23,6 +23,11 @@ kaggle = preparation.drop_columns(kaggle)
 data = preparation.feature_engineering(data)
 kaggle = preparation.feature_engineering(kaggle)
 
+company_weights = preparation.get_comp_weights(data)
+
+data = preparation.set_comp_weights(data, company_weights)
+kaggle = preparation.set_comp_weights(kaggle, company_weights)
+
 # Кодирование строк
 data, kaggle = encoding.encode_labels(data, kaggle)
 
